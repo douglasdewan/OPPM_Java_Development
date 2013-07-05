@@ -1,0 +1,77 @@
+package psCategoryDuplications;
+
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import org.w3c.dom.Element;
+import java.io.File;
+
+public class psCategoryDuplication 
+{
+
+	public static void main(String[] args)
+	{
+		try
+		{
+			File psPackage = new File(args[0]);
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(psPackage);
+			
+			Element root = doc.getDocumentElement();  
+			NodeList children = root.getChildNodes(); 
+			
+			System.out.println("Number of Nodes: "+ children.getLength());
+			
+			int Depth = 1;
+			
+			psGetAllChildNodes(children, Depth, args[2]);
+			
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+			
+	}
+	
+	public static void psGetAllChildNodes(NodeList nodeList, int Depth, String OrigString)
+	{
+		
+		
+		for(int i=0; i<nodeList.getLength(); i++)
+		{
+		      Node childNode = nodeList.item(i);
+		      
+		      Depth++;
+		      
+		      System.out.println("Level - " + Depth + " - Node Name: " + childNode.getNodeName());
+		      
+		      MatchString(nodeList,OrigString);
+
+		      NodeList children = childNode.getChildNodes();
+		      if (children != null)
+		      {
+		         psGetAllChildNodes(children,Depth,OrigString);
+		         Depth--;
+		      }
+		}
+	}
+	
+	public static void MatchString(NodeList nodeList, String MatchingString)
+	{
+		for (int i=0; i<nodeList.getLength();i++)
+		{
+						
+			if (nodeList.item(i).getNodeValue() == MatchingString)
+			{
+				System.out.println("We have a match.  Node - " + nodeList.item(i).getNodeName());
+			}
+		}
+	}		
+}
+
+

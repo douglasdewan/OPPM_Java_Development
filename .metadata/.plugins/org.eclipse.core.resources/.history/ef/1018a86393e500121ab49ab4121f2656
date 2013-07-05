@@ -1,0 +1,87 @@
+package psCategoryDuplications;
+
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import org.w3c.dom.Element;
+import java.io.File;
+import java.text.*;
+
+public class psCategoryDuplication 
+{
+
+	public static void main(String[] args)
+	{
+		try
+		{
+	
+			File psPackage = new File("D:\\Tools\\Misc\\JARM Count Calculations\\JARM_Export.xml");
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(psPackage);
+			
+			Element root = doc.getDocumentElement();  
+			NodeList children = root.getChildNodes(); 
+			
+			System.out.println("Number of Nodes: "+ children.getLength());
+			
+			for (int index = 0; index < children.getLength(); index++)
+			{
+				System.out.print("List of Children: " + children.item(index).getNodeName() + ", ");
+			}
+			
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+			
+	}
+	
+	/* public void doSomethingWithAllToConsole(NodeList nodeList, String tabs)
+	{
+	    for(int i=0; i<nodeList.getLength(); i++){
+
+	      //print current node & values
+	      Node childNode = nodeList.item(i);
+	      if(childNode.getNodeType()==Node.ELEMENT_NODE){
+	          System.out.print(tabs + childNode.getNodeName());
+	          if(childNode.getFirstChild()!=null 
+	                  && childNode.getFirstChild().getNodeType()==Node.TEXT_NODE
+	                  && !StringUtil.isNullOrEmpty(childNode.getFirstChild().getNodeValue()) ){
+	              System.out.print(" = " + childNode.getFirstChild().getNodeValue());
+	          }
+	          System.out.println();
+	      }
+
+	      //recursively iterate through child nodes
+	      NodeList children = childNode.getChildNodes();
+	      if (children != null)
+	      {
+	          doSomethingWithAllToConsole(children, tabs+"\t");
+	      }
+	    }
+	}
+	*/
+	
+	public void psGetChildNodes(NodeList nodeList)
+	{
+		for(int i=0; i<nodeList.getLength(); i++){
+		      Node childNode = nodeList.item(i);
+		      if (childNode.getNodeName().equals("person")) {
+		         //do something with it
+		      }
+
+		      NodeList children = childNode.getChildNodes();
+		      if (children != null)
+		      {
+		         psGetChildNodes(children);
+		      }
+		    }
+	}		
+}
+
+
