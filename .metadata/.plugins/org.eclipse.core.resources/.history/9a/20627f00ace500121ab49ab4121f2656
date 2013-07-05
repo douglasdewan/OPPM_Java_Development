@@ -80,8 +80,7 @@ public class psCategoryDuplication
 	private static void printAllNodesAndInfo(NodeList nodeList, String InputStringMatch, String OutputString)
 	{
 		 
-	    for (int count = 0; count < nodeList.getLength(); count++)
-	    {
+	    for (int count = 0; count < nodeList.getLength(); count++) {
 	 
 		Node tempNode = nodeList.item(count);
 	 
@@ -102,9 +101,6 @@ public class psCategoryDuplication
 					Node node = nodeMap.item(i);
 					System.out.println("attr name : " + node.getNodeName());
 					System.out.println("attr value : " + node.getNodeValue());
-					
-					// Check to see if the replacement string is in this value.
-					// If it is print what the replacement value would look like.
 					if (node.getNodeValue().contains(InputStringMatch))
 					{
 						System.out.println("\n\n" + "================  Match ================");
