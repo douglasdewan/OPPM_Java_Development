@@ -26,11 +26,11 @@ public class psCategoryDuplication
 			NodeList children = root.getChildNodes(); 
 			
 			System.out.println("Number of Nodes: "+ children.getLength());
-			
-			int Depth = 1;
-			
+						
 			printAllNodesAndInfo(children, args[2], args[3]);
 			
+			// My attempt at listing things.  Will probably deprecate and delete.
+			// int Depth = 1;
 			// psGetAllChildNodes(children, Depth, args[2]);
 			
 		}
